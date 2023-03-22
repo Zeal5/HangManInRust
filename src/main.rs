@@ -41,7 +41,7 @@ fn main() {
         println!("Congrats you guessed the correct word `{secret_word}`") }
 }
 fn get_secret_word() -> String {
-    let contents = fs::read_to_string("src\\random_words.txt").unwrap();
+    let contents = fs::read_to_string("random_words.txt").unwrap();
     let mut list_of_words = vec![];
     for line in contents.lines() {
         list_of_words.push(line)
