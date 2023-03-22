@@ -1,9 +1,12 @@
 // HANGMAN GAME IN RUST
+use rand::Rng;
+use std::fs;
 use std::io;
 
 fn main() {
+    
     // secert word
-    let secret_word: String = "alian".to_ascii_lowercase();
+    let secret_word: String = get_secret_word().to_ascii_lowercase();
 
     // prep guess word
     let mut guessed_word: String = String::from("");
@@ -11,7 +14,7 @@ fn main() {
         guessed_word.push('_');
     }
     // lives
-    let mut lives = 7;
+    let mut lives = 11;
 
     while lives > 0 && (secret_word != guessed_word) {
         println!("Guess a letter");
@@ -31,8 +34,22 @@ fn main() {
         } else {
             lives -= 1
         }
+        println!("Tries left {lives}");
         println!("{}", guessed_word);
+    } 
+    if secret_word == guessed_word {
+        println!("Congrats you guessed the correct word `{secret_word}`") }
+}
+fn get_secret_word() -> String {
+    let contents = fs::read_to_string("src\\random_words.txt").unwrap();
+    let mut list_of_words = vec![];
+    for line in contents.lines() {
+        list_of_words.push(line)
     }
+    let mut rng = rand::thread_rng();
+    let random_number = rng.gen_range(1..=1000);
+    
+    return String::from(list_of_words[random_number]);
 }
 
 fn read_user_input() -> char {
