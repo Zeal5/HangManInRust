@@ -4,7 +4,6 @@ use std::fs;
 use std::io;
 
 fn main() {
-    
     // secert word
     let secret_word: String = get_secret_word().to_ascii_lowercase();
 
@@ -36,9 +35,10 @@ fn main() {
         }
         println!("Tries left {lives}");
         println!("{}", guessed_word);
-    } 
+    }
     if secret_word == guessed_word {
-        println!("Congrats you guessed the correct word `{secret_word}`") }
+        println!("Congrats you guessed the correct word `{secret_word}`")
+    }
 }
 fn get_secret_word() -> String {
     let contents = fs::read_to_string("random_words.txt").unwrap();
@@ -48,7 +48,7 @@ fn get_secret_word() -> String {
     }
     let mut rng = rand::thread_rng();
     let random_number = rng.gen_range(1..=1000);
-    
+
     return String::from(list_of_words[random_number]);
 }
 
